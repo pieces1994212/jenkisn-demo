@@ -1,8 +1,4 @@
 buildscript {
-    ext {
-        imageVersion = "latest"
-    }
-
     repositories {
         maven{ url 'https://plugins.gradle.org/m2/' }
         mavenCentral()
@@ -23,14 +19,14 @@ apply plugin: 'com.palantir.docker-run'
 
 
 docker {
-    name "${group}/${bootJar.baseName}:${imageVersion}"
+    name "${group}/${bootJar.baseName}:${version}"
     files bootJar.archivePath
     buildArgs(['JAR_FILE': "${bootJar.archiveName}"])
 }
 
 dockerRun{
     name "${bootJar.baseName}"
-    image "${group}/${bootJar.baseName}:${imageVersion}"
+    image "${group}/${bootJar.baseName}:${version}"
     ports '8300:8300'
 }
 
